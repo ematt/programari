@@ -20,15 +20,17 @@
 <div id="menu">
     Navigation:
     <ul>
-        <li><a href="[% c.uri_for('/books/list') %]">Home</a></li>
+        <li><a href="[% c.uri_for('/student/login') %]">Login</a></li>
         <li><a href="[% c.uri_for('/')
             %]" title="Catalyst Welcome Page">Welcome</a></li>
+        <li><a href="[% c.uri_for('/student/register') %]">Register</a></li>
+        <li><a href="[% c.uri_for('/student/logout') %]">Logout</a></li>
     </ul>
 </div><!-- end menu -->
  
 <div id="content">
     [%# Status and error messages %]
-    <span class="message">[% msg %]</span>
+    <span class="message">[% status_msg %]</span>
     <span class="error">[% error_msg %]</span>
     [%# This is where TT will stick all of your template's contents. -%]
     [% content %]

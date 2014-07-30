@@ -45,11 +45,16 @@ sub register_do :Local :Args(0) {
     my $room = $c->request->params->{room} || 0;
     my $pass = $c->request->params->{pass};
     my $pass2= $c->request->params->{pass2};
-    
+    $c->log->debug($c->request->params);
+    $c->log->debug($name2 ne $c->request->params);
     if($pass ne $pass2) {
-        $c->stash(msg => 'Parolele nu coencid.');
-        $c->forward('register');
-    }
+        $c->log->debug("Nu coiencid");
+        $c->stash(error_msg => 'Parolele nu coencid.');
+        $c->response->redirect(
+            $c->uri_for($self->action_for('register'))
+        );
+        return 0;
+    };
     
     my $student = $c->model('DB::Studenti')->create({
             nume => $name,
@@ -58,7 +63,7 @@ sub register_do :Local :Args(0) {
             pass => $pass,
             rol => 'vizitator',
         },
-);
+    );
     $c->stash(msg => "Inregistrat cu succes!");
     $c->response->redirect(
         $c->uri_for($self->action_for('login'))
