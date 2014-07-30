@@ -20,6 +20,12 @@ use Catalyst qw/
     -Debug
     ConfigLoader
     Static::Simple
+
+    Authentication
+ 
+    Session
+    Session::Store::File
+    Session::State::Cookie
 /;
 
 extends 'Catalyst';
@@ -49,6 +55,18 @@ __PACKAGE__->config(
         INCLUDE_PATH => [
             __PACKAGE__->path_to( 'root', 'src' ),
         ],
+    },
+);
+
+# Configure SimpleDB Authentication
+__PACKAGE__->config(
+    'Plugin::Authentication' => {
+        default => {
+            class           => 'SimpleDB',
+            user_model      => 'DB::Studenti',
+            password_type   => 'clear',
+            password_field  => 'pass',
+        },
     },
 );
 

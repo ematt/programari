@@ -1,6 +1,6 @@
 [% META title = 'Inregistrare student' -%]
 
-<form method="post' action="[% c.uri_for('login_do') %]">
+<form method="post" action="[% c.uri_for('login_do') %]">
 Nume:<input type="text" name="name"/>
 Parola: <input type="password" name="pass"/>
 <input type="submit" value="Login"/>

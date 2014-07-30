@@ -71,11 +71,46 @@ sub register_do :Local :Args(0) {
     
 }
 
-sub login :Local {
+sub login :Local {};
+
+sub login_do :Local {
     
+    my( $self, $c) = @_;
     
+    my $name = $c->request->params->{name};
+    my $pass = $c->request->params->{pass};
+    
+#     if($c->model('DB::Studenti')->find({
+#         nume => $name,
+#         pass => $pass,
+#     })) {
+#         $c->response->redirect($c->uri_for($self->action_for('login'),
+#         {status_msg => "Login cu succes!"}));
+#         
+#         return 1;
+#     } else {
+#         $c->response->redirect($c->uri_for($self->action_for('login'),
+#         {error_msg => "Combinatia nu a fost gasita"}));
+#     }
+    if($name && $pass) {
+        
+        if($c->authenticate({
+                nume => $name,
+                pass => $pass} )) 
+        {
+                     $c->response->redirect($c->uri_for($self->action_for('login'),
+                    {status_msg => "Login cu succes!"}));
+                } else {
+                    $c->response->redirect($c->uri_for($self->action_for('login'),
+                    {error_msg => "Combinatia nu a fost gasita"}));
+                }
+    } else {
+        $c->response->redirect($c->uri_for($self->action_for('login'),
+        {error_msg => "Camp gol!"}));
+    }
     
 }
+
 
 =encoding utf8
 
