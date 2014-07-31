@@ -34,6 +34,9 @@
         status_msg || c.request.params.status_msg | html %]</span>
     <span class="error">[% error_msg || c.request.params.error_msg | html %]</span>
     [%# This is where TT will stick all of your template's contents. -%]
+    [% IF (c.user_exists) %]
+        Este
+    [% END %]
     [% content %]
 </div><!-- end content -->
 </div><!-- end bodyblock -->
