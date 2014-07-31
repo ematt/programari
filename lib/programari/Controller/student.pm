@@ -61,7 +61,6 @@ sub register_do :Local :Args(0) {
             prenume=>$name2,
             camera => $room,
             pass => $pass,
-            rol => 'vizitator',
         },
     );
     $c->stash(msg => "Inregistrat cu succes!");
