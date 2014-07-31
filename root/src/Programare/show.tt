@@ -1,0 +1,26 @@
+[% META title="Programari" %]
+[% USE Dumper %]
+Text
+[%#  Dumper.dump(rezs) %]
+[%#  Dumper.dump(c.stash) %]<br/>
+<table>
+    <tr>
+        <td>Nr. crt.</td>
+        <td>Nume student</td>
+        <td>Etaj</td>
+        <td>Data</td>
+        <td>Data</td>
+    </tr>
+[% i=1 %]
+[% FOREACH rez IN rezs %]
+[%# WHILE (rez = rezs.next) %]
+    <tr>
+        <td>[% i %]</td>
+        <td>[% rez.student.nume %]<br/>[% rez.student.prenume %]</td>
+        <td>[% rez.etaj %]</td>
+        <td>[% rez.data.year %]</td>
+        <td>[%# Dumper.dump_html(rez.data) %]</td>
+    </tr>
+    [% i=i+1 %]
+[% END -%]
+</table>

@@ -1,10 +1,10 @@
 [% META title = 'Inregistrare student' -%]
 
 <form method="post" action="[% c.uri_for('register_do') %]">
-	Nume: <input type="text" name="name" /><br/>
-	Prenume: <input type="text" name="name2" /> <br/>
-	Camera: <input type="text" name="room"/><br/>
-	Parola: <input type="password" name="pass"/><br/>
-	C parola: <input type="password" name="pass2"/><br/>
+	Nume: <input type="text" for="name" /><br/>
+	Prenume: <input type="text" for="name2" /> <br/>
+	Camera: <input type="text" for="room"/><br/>
+	Parola: <input type="password" for="pass"/><br/>
+	C parola: <input type="password" for="pass2"/><br/>
 	<input type="submit" value="Inregistrare"/>
 </form>

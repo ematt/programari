@@ -98,9 +98,10 @@ __PACKAGE__->set_primary_key("id");
 # Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-07-30 16:31:49
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7NU3X+trsD3L+/boRG3zRg
 
-__PACKAGE__->has_many('progrmari','programari::Schema::Result::Programari','id');
+__PACKAGE__->has_many('programari','programari::Schema::Result::Programari','id');
 __PACKAGE__->has_many(student_role => 'programari::Schema::Result::StudentRoluri', 'id_student');
 __PACKAGE__->many_to_many(roles => 'student_role','role');
+
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

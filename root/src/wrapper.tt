@@ -25,6 +25,7 @@
             %]" title="Catalyst Welcome Page">Welcome</a></li>
         <li><a href="[% c.uri_for('/student/register') %]">Register</a></li>
         <li><a href="[% c.uri_for('/student/logout') %]">Logout</a></li>
+        <li><a href="[% c.uri_for('/programare/show') %]">Lista programari</a></li>
     </ul>
 </div><!-- end menu -->
  

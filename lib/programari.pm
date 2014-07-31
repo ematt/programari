@@ -22,6 +22,7 @@ use Catalyst qw/
     Static::Simple
 
     Authentication
+    Authorization::Roles
  
     Session
     Session::Store::File
