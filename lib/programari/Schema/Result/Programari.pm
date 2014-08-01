@@ -116,11 +116,21 @@ __PACKAGE__->add_unique_constraint("data", ["data", "cod", "etaj"]);
 
 __PACKAGE__->belongs_to('student','programari::Schema::Result::Studenti','id_student');
 
-# __PACKAGE__->add_columns(
-#    data => { data_type => 'datetime' }
-# );
+sub get_cod_ore {
+        
+    my $self = shift;
 
+    return $self->cod =~ m/(^.)/ if $self->has_column('cod');
 
+}
+
+sub get_cod_zi {
+    
+    my $self = shift;
+
+    return $self->cod =~ m/(.$)/ if $self->has_column('cod');
+
+}
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
