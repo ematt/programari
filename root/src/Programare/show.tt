@@ -70,7 +70,8 @@ Alege:
             [% s=0 %][%# rezs loop index %]
             [% WHILE (!k && s <= rezs.size) %]
                 [% IF ( rezs.$s.get_cod_ore == i &&  rezs.$s.get_cod_zi == j  ) %]
-                    ok
+                    [% rezs.$s.student.nume %] [% rezs.$s.student.prenume %]<br/> din
+                    [% rezs.$s.student.camera %]
                     [% k=1 %]
                 [% END %]
                 [% s=s+1 %]

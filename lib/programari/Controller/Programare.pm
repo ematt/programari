@@ -33,7 +33,7 @@ sub show :Local {
                     {},{
                     join => 'student',
                     order_by => 'data',
-                    select => ['student.nume', 'student.prenume', 'data', 'etaj','cod', 'student.camera id', 
+                    select => ['student.nume', 'student.prenume', 'data', 'etaj','cod', 'student.camera','student.id','id', 
                                 ],
                     '+select' =>{CONCAT => "student.nume,\' \',student.prenume",
                                 -as => 'full_name'},
