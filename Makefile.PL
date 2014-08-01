@@ -24,6 +24,9 @@ requires 'Catalyst::Plugin::Session::Store::File';
 requires 'Catalyst::Plugin::Session::State::Cookie';
 requires 'Catalyst::Plugin::Authorization::Roles';
 
+requires 'DateTime';
+requires 'DateTime::Duration';
+
 test_requires 'Test::More' => '0.88';
 catalyst;
 

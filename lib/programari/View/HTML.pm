@@ -12,6 +12,7 @@ __PACKAGE__->config(
     ],
     TIMER => 0,
     WRAPPER => 'wrapper.tt',
+#     DEBUG => 'all',
 );
 
 =head1 NAME

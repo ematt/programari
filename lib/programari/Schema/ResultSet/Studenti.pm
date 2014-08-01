@@ -6,8 +6,16 @@ use base 'DBIx::Class::ResultSet';
 
 
 sub full_name {
-        my $self = shift;
-        return $self->{nume};
+    my $self = shift;
+    
+    $self->search(
+        {},
+        {
+            select => [ 'CONCAT(studenti.nume,\' \',studenti.prenume)' ],
+            as => 'full_name'
+        }
+    );
+#     return $self->nume.' '.$self->prenume;
 }
 
 1;

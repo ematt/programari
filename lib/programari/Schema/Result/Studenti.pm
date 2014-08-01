@@ -102,7 +102,12 @@ __PACKAGE__->has_many('programari','programari::Schema::Result::Programari','id'
 __PACKAGE__->has_many(student_role => 'programari::Schema::Result::StudentRoluri', 'id_student');
 __PACKAGE__->many_to_many(roles => 'student_role','role');
 
-
+# __PACKAGE__->add_columns(
+#     "full_name",
+#     {data_type => "varchar",
+#     is_nullable => 0,
+#     size => 255,
+# );
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;

@@ -16,9 +16,9 @@ Text
 [%# WHILE (rez = rezs.next) %]
     <tr>
         <td>[% i %]</td>
-        <td>[% rez.student.nume %]<br/>[% rez.student.prenume %]</td>
+        <td>[% rez.student.nume %] [% rez.student.prenume %]</td>
         <td>[% rez.etaj %]</td>
-        <td>[% rez.data.year %]</td>
+        <td>[% rez.data.strftime('%Y/%m/%d') %]</td>
         <td>[%# Dumper.dump_html(rez.data) %]</td>
     </tr>
     [% i=i+1 %]

@@ -27,8 +27,13 @@ sub show :Local {
     my @rezs = [$c->model('DB::Programari')->search(
                     {},{
                     join => 'student',
-                    order_by => ['data'],
-                    select => [qw/student.nume student.prenume data etaj student.camera id/],})->all()];
+                    order_by => 'data',
+                    select => ['student.nume', 'student.prenume', 'data', 'etaj', 'student.camera id', 
+                                ],
+                    '+select' =>{CONCAT => "student.nume,\' \',student.prenume",
+                                -as => 'full_name'},
+#                     as => qw/nume prenume data etaj camera id full_name/,
+                    })->this_week()->all()];
     $c->stash(rezs => @rezs);
 #     $c->log->debug('rezs:'.$rezs);
     $c->stash(status_msg => "Aici sunt programarile");

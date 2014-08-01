@@ -51,8 +51,13 @@ __PACKAGE__->table("programari");
 
 =head2 data
 
-  data_type: 'datetime'
+  data_type: 'date'
   datetime_undef_if_invalid: 1
+  is_nullable: 0
+
+=head2 cod
+
+  data_type: 'tinyint'
   is_nullable: 0
 
 =head2 etaj
@@ -68,11 +73,9 @@ __PACKAGE__->add_columns(
   "id_student",
   { data_type => "integer", is_nullable => 0 },
   "data",
-  {
-    data_type => "datetime",
-    datetime_undef_if_invalid => 1,
-    is_nullable => 0,
-  },
+  { data_type => "date", datetime_undef_if_invalid => 1, is_nullable => 0 },
+  "cod",
+  { data_type => "tinyint", is_nullable => 0 },
   "etaj",
   { data_type => "tinyint", is_nullable => 0 },
 );
@@ -89,15 +92,34 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("id");
 
+=head1 UNIQUE CONSTRAINTS
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-07-31 17:47:58
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:sHWmI2uJ6r9T58LuWKwrgg
+=head2 C<data>
+
+=over 4
+
+=item * L</data>
+
+=item * L</cod>
+
+=item * L</etaj>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("data", ["data", "cod", "etaj"]);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-08-01 12:45:11
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:U7OSMPm8L/0qiQSUHw7akw
 
 __PACKAGE__->belongs_to('student','programari::Schema::Result::Studenti','id_student');
 
 # __PACKAGE__->add_columns(
 #    data => { data_type => 'datetime' }
 # );
+
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
