@@ -61,6 +61,7 @@ sub show :Local {
 #     $c->log->debug('rezs:'.$rezs);
 #     $c->stash(status_msg => "Aici sunt programarile");
     $c->stash(template => 'Programare/show.tt');
+    if ($c->check_user_roles('admin')) {$c->log->debug("admin aici");$c->log->debug("adasdasddsamin aici");}
 }
 
 

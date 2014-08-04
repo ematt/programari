@@ -2,7 +2,10 @@
 [% USE Dumper %]
 [%#  Dumper.dump(rezs) %]
 [%#  Dumper.dump(c.stash) %]<br/>
+[% IF (c.check_user_roles('admin'))%]
+    6wfegrthfdswetfg
 
+[% END %]
 <p>Programarile pentru 
     [% IF (etaj == 0) %]
         parter
