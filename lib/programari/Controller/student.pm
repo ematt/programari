@@ -61,6 +61,7 @@ sub register_do :Local :Args(0) {
             prenume=>$name2,
             camera => $room,
             pass => $pass,
+            rol => 'vizitator',
         },
     );
     $c->stash(msg => "Inregistrat cu succes!");
@@ -110,17 +111,6 @@ sub login_do :Local {
     
 }
 
-sub logout :Local{
-    
-    my( $self, $c ) = @_;
-
-    $c->logout();
-
-    $c->response->redirect(
-            $c->uri_for($self->action_for('login'), 
-            {status_msg => "La revedere!"} ));
-
-}
 
 =encoding utf8
 
