@@ -45,7 +45,7 @@ sub show :Local {
               sunday => week_sunday());
     $c->stash(rezs => @rezs);
 #     $c->log->debug('rezs:'.$rezs);
-    $c->stash(status_msg => "Aici sunt programarile");
+#     $c->stash(status_msg => "Aici sunt programarile");
     $c->stash(template => 'Programare/show.tt');
 }
 
@@ -53,6 +53,13 @@ sub show :Local {
 sub programeaza :Local {
     my ( $self, $c ) = @_;
     
+     
+    if ($self->limit_reach($c)) {
+        $c->response->redirect($c->uri_for('show', 
+                                        {error_msg => "Ati atins limita maxima!", 
+                                        etaj => $c->request->params->{'etaj'} }));
+        return 0;
+    }
     my $status_msg= 'Programare facuta!';
     
     my $programare = $c->model('DB::Programari')->create({
@@ -71,23 +78,30 @@ sub programeaza :Local {
 sub sterge :Local {
     
     my ( $self, $c ) = @_;
-    my $status_msg;
-    my $error_msg;
 
     my $del = $c->model('DB::Programari')->search({
         id => $c->request->params->{id},
         id_student => $c->user->id,
     });
     
-    if($del->delete) {
-        my $status_msg="Programare stearsa";
-    } else {
-        my $error_msg = "Eroare la stergere";
-    }
+    $del->delete;
 
     $c->response->redirect($c->uri_for('show', {
                             etaj => $c->request->params->{'etaj'},
                             }));
+
+}
+
+sub limit_reach {
+    
+    my ( $self, $c ) = @_;
+
+    my $nr = $c->model('DB::Programari')->search({
+                        id_student => $c->user->id,
+                    })->this_week()->count;
+    return 1 if $nr >= 2;
+#     $c->log->debug($c->user->programari->count);
+    return 0;
 
 }
 

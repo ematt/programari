@@ -99,6 +99,7 @@ __PACKAGE__->set_primary_key("id");
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7NU3X+trsD3L+/boRG3zRg
 
 __PACKAGE__->has_many('programari','programari::Schema::Result::Programari','id');
+
 __PACKAGE__->has_many(student_role => 'programari::Schema::Result::StudentRoluri', 'id_student');
 __PACKAGE__->many_to_many(roles => 'student_role','role');
 
