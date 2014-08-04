@@ -50,6 +50,47 @@ sub show :Local {
 }
 
 
+sub programeaza :Local {
+    my ( $self, $c ) = @_;
+    
+    my $status_msg= 'Programare facuta!';
+    
+    my $programare = $c->model('DB::Programari')->create({
+        data => \('CURDATE()+'.$c->request->params->{'zi'}),
+        cod => $c->request->params->{'ore'}.$c->request->params->{'zi'},
+        etaj => $c->request->params->{'etaj'},
+        id_student => $c->user->id,
+    });
+    
+    
+    $c->response->redirect($c->uri_for('show', 
+                                        {status_msg => $status_msg, etaj => $c->request->params->{'etaj'} }));
+
+}
+
+sub sterge :Local {
+    
+    my ( $self, $c ) = @_;
+    my $status_msg;
+    my $error_msg;
+
+    my $del = $c->model('DB::Programari')->search({
+        id => $c->request->params->{id},
+        id_student => $c->user->id,
+    });
+    
+    if($del->delete) {
+        my $status_msg="Programare stearsa";
+    } else {
+        my $error_msg = "Eroare la stergere";
+    }
+
+    $c->response->redirect($c->uri_for('show', {
+                            etaj => $c->request->params->{'etaj'},
+                            }));
+
+}
+
 =encoding utf8
 
 =head1 AUTHOR

@@ -10,22 +10,22 @@ use Exporter 'import';
 our @EXPORT_OK = qw/ week_monday week_sunday /;
 
 
-my $tmp = DateTime->now();
+my $tmp = DateTime->now(time_zone => 'Europe/Bucharest');
 
 
 sub week_monday {
     
     my $to_monday = DateTime::Duration->new(
-        days => $tmp->day() - $tmp->day_of_week()
+        days => $tmp->day_of_week() - 1
     );
-    my $monday = DateTime->now()->add_duration($to_monday);
+    my $monday = DateTime->now()->subtract_duration($to_monday);
     return DateTime::Format::MySQL->format_date($monday);
 }
 
 sub week_sunday {
     
     my $to_sunday = DateTime::Duration->new(
-        days => $tmp->day() + 6 - $tmp->day_of_week()
+        days => 7 - $tmp->day_of_week()
     );
 
     my $sunday = DateTime->now()->add_duration($to_sunday);

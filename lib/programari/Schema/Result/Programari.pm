@@ -120,8 +120,13 @@ sub get_cod_ore {
         
     my $self = shift;
 
-    return $self->cod =~ m/(^.)/ if $self->has_column('cod');
+    if ($self->has_column('cod')) {
+        
+        return 0 if ($self->cod < 10);
 
+        return $self->cod =~ m/(^.)/ ;
+    }
+    return undef;
 }
 
 sub get_cod_zi {

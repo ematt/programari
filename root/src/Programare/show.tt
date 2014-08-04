@@ -33,11 +33,53 @@ Alege:
 </form>
 
 
+
+
+[%# Dumper.dump_html(c.user) %]
+[%# Dumper.dump_html(rezs.2) %]
+<table>
+[% i=0 %]
+[% WHILE ( i <= 5 ) %]
+    [% j=0 %]
+    <tr>
+    [% WHILE ( j <= 6 ) %]
+        <td>
+            [% k=0 %][%# L-am gasit? NU %]
+            [% s=0 %][%# rezs loop index %]
+            [% WHILE (!k && s < rezs.size) %]
+                [% IF ( rezs.$s.get_cod_ore == i &&  rezs.$s.get_cod_zi == j  ) %]
+
+                    [% rezs.$s.student.nume %] [% rezs.$s.student.prenume %]<br/> din
+                    [% rezs.$s.student.camera %]
+                    [% k=1 %][%# L-am gasit %]
+                    
+                    ([% rezs.$s.get_cod_ore %] - [% rezs.$s.get_cod_zi %]) ([% i %] - [% j %])
+                    <a href="[% c.uri_for('sterge', { id=rezs.$s.id, etaj=>c.request.params.etaj }) %]">Sterge</a>
+
+                [% END %]
+                [% s=s+1 %]
+            [% END %]
+            [% IF ( !k ) %]
+                    <a href="
+                        [% c.uri_for('programeaza',
+                            {ore=>i, zi=>j, etaj=>c.request.params.etaj}) %]
+                    ">Rezerva</a>
+            [% END %]
+            
+        </td>
+        [% j=j+1 %]
+    [% END %]
+    </tr>
+    [% i=i+1 %]
+[% END %]
+</table>
+
 <table>
     <tr>
         <td>Nr. crt.</td>
         <td>Nume student</td>
         <td>Etaj</td>
+        <td>Data</td>
         <td>Data</td>
         <td>Data</td>
     </tr>
@@ -53,33 +95,10 @@ Alege:
         <td>[%# Dumper.dump_html(rez.data) %]
             [% rez.get_cod_ore %] [% rez.get_cod_zi %]
         </td>
+        <td>[% rez.id %] - [% rez.student.id %]
+        </td>
     </tr>
     [% i=i+1 %]
 [% END -%]
 
-</table>
-
-<table border="2">
-[% i=0 %]
-[% WHILE ( i <= 5 ) %]
-    [% j=0 %]
-    <tr>
-    [% WHILE ( j <= 6 ) %]
-        <td>
-            [% k=0 %][%# L-am gasit? NU %]
-            [% s=0 %][%# rezs loop index %]
-            [% WHILE (!k && s <= rezs.size) %]
-                [% IF ( rezs.$s.get_cod_ore == i &&  rezs.$s.get_cod_zi == j  ) %]
-                    [% rezs.$s.student.nume %] [% rezs.$s.student.prenume %]<br/> din
-                    [% rezs.$s.student.camera %]
-                    [% k=1 %]
-                [% END %]
-                [% s=s+1 %]
-            [% END %]
-        </td>
-        [% j=j+1 %]
-    [% END %]
-    </tr>
-    [% i=i+1 %]
-[% END %]
 </table>
