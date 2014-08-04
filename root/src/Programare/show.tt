@@ -53,9 +53,9 @@ Alege:
                     [% rezs.$s.student.camera %]
                     [% k=1 %][%# L-am gasit %]
                     
-                    ([% rezs.$s.get_cod_ore %] - [% rezs.$s.get_cod_zi %]) ([% i %] - [% j %])
-                    <a href="[% c.uri_for('sterge', { id=rezs.$s.id, etaj=>c.request.params.etaj }) %]">Sterge</a>
-
+                    [% IF (rezs.$s.student.id == c.user.id) %]
+                        <a href="[% c.uri_for('sterge', { id=rezs.$s.id, etaj=>c.request.params.etaj }) %]">Sterge</a>
+                    [% END %]
                 [% END %]
                 [% s=s+1 %]
             [% END %]
