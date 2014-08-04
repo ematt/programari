@@ -110,6 +110,22 @@ __PACKAGE__->many_to_many(roles => 'student_role','role');
 #     size => 255,
 # );
 
+sub get_etaj {
+    
+    my $self = shift;    
+    
+    if($self->has_column('camera')) {
+        
+        return 0 if($self->camera < 100);
+
+        return $self->camera =~ m/(^.)/;
+
+    }
+
+    return undef;
+
+}
+
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
 1;

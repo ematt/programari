@@ -22,11 +22,25 @@ Catalyst Controller.
 
 =cut
 
+sub auto :Private {
+    my ( $self, $c ) = @_;
+
+    if(!$c->user_exists()) {
+        $c->response->redirect($c->uri_for('/student/login', {error_msg=>"Trebuie sa fi logat"} ) );
+        return 0;
+    }
+    return 1;
+}
+
 sub show :Local {
     my ( $self, $c ) = @_;
 #     $c->model('DB::Programari')->storage->debug(1);
     
     my $etaj = ($c->request->params->{'etaj'} ? $c->request->params->{'etaj'} : 0); 
+#     my $etaj = ($c->request->params->{'etaj'} ? $c->request->params->{'etaj'} : $c->user->get_etaj); 
+#     $c->log->debug("sdfdsfdsF");
+#     $c->log->debug($c->user->get_etaj,$c->user->camera,$c->user->camera =~ m/(^.)/,($c->request->params->{'etaj'} ? $c->request->params->{'etaj'} : $c->user->get_etaj),$etaj);
+#     $c->log->debug("sdfdsfdsF");
     $c->stash(etaj => $etaj);
     
     my @rezs = [$c->model('DB::Programari')->search(

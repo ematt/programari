@@ -1,6 +1,5 @@
 [% META title="Programari" %]
 [% USE Dumper %]
-Text
 [%#  Dumper.dump(rezs) %]
 [%#  Dumper.dump(c.stash) %]<br/>
 
@@ -38,10 +37,20 @@ Alege:
 [%# Dumper.dump_html(c.user) %]
 [%# Dumper.dump_html(rezs.2) %]
 <table>
+<tr>
+<th>Ora\Zi</th>
+<th>Luni</th>
+<th>Marti</th>
+<th>Miercuri</th>
+<th>Joi</th>
+<th>Vineri</th>
+<th>Sambata</th>
+<th>Duminica</th>
 [% i=0 %]
 [% WHILE ( i <= 5 ) %]
     [% j=0 %]
     <tr>
+    <th>[% 8+2*i %]-[% 8+2*i+2 %]</th>
     [% WHILE ( j <= 6 ) %]
         <td>
             [% k=0 %][%# L-am gasit? NU %]
